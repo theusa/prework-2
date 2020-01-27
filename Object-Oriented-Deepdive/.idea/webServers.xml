@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="3e0dbc4f-68ae-44f5-bfd7-adc196bb48cd" name="Object-Oriented_Deepdive" url="https://bootcamp-coders.cnm.edu~ualnaji/Object-Oriented-Deepdive">
+        <fileTransfer host="bootcamp-coders.cnm.edu" port="22" rootFolder="/home/ualnaji/public_html/Object-Oriented-Deepdive" accessType="SFTP" authAgent="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
