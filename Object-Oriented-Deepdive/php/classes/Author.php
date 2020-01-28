@@ -150,21 +150,40 @@ class Author {
      * @throws \RangeException if $newAuthorAvatarUrl is > 255 characters
      * @throws \TypeError if $newAuthorAvatarUrl is not a string
      */
-    public function setAuthorAvatarUrl(string $newAuthorAvatarUrl): void {
-        //verify the author url is secure
-        $newAuthorAvatarUrl = trim($newAuthorAvatarUrl);
-        $newAuthorAvatarUrl = filter_var($newAuthorAvatarUrl, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES );
-        if(empty($newAuthorAvatarUrl)===true) {
-            throw(new\InvalidArgumentException("author handle URL is empty or insecure"));
+
+  public function setAuthorAvatarUrl(string $newAuthorAvatarUrl): void {
+        if($newAuthorAvatarUrl === null) {
+            $this->authorAvatarUrl = null;
+            return;
         }
-        //verify the author avatar url will fit in the database
         if(strlen($newAuthorAvatarUrl) > 255) {
-            throw(new \RangeException("author avatar URL is too large"));
+            throw (new \RangeException("author avatar URL is too large"));
+        }
+        $this->authorAvatarUrl = $newAuthorAvatarUrl;
+    }
+
+/*    public function setAuthorAvatarUrl(string $newAuthorAvatarUrl): void {
+    //verify the author url is secure
+    $newAuthorAvatarUrl = trim($newAuthorAvatarUrl);
+    $newAuthorAvatarUrl = filter_var($newAuthorAvatarUrl, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    if (empty($newAuthorAvatarUrl) === true) {
+        throw(new\InvalidArgumentException("author handle URL is empty or insecure"));
+    }
+
+        $newAuthorEmail = trim($newAuthorEmail);
+        $newAuthorEmail = filter_var($newAuthorEmail, FILTER_VALIDATE_EMAIL);
+        if(empty($newAuthorEmail) === true) {
+            throw(new \InvalidArgumentException("author email is empty or insecure"));
+
+
+    //verify the author avatar url will fit in the database
+    if (strlen($newAuthorAvatarUrl) > 255) {
+        throw(new \RangeException("author avatar URL is too large"));
 
         //store the author avatar url
         $this->authorAvatarUrl = $newAuthorAvatarUrl;
-        }
     }
+}*/
 
     /**
      * accessor method for author email
