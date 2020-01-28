@@ -1,11 +1,19 @@
 <?php
+namespace Ualnaji\DataDesign;
+require_once(dirname(__DIR__). "/vendor/autoload.php");
+require_once("autoload.php");
+use Ramsey\Uuid\Uuid;
+
+
 /**
  * Object Oriented Phase I
  *
- * @author Usaama Alnaji <ualnaji@cnm.edu with help from Dylan McDonald's code
+ * @author Usaama Alnaji <ualnaji@cnm.edu> with help from Dylan McDonald's code
  */
 
-class author {
+//( ! ) Fatal error: Trait 'ualnaji\DataDesign\ValidateUuid' not found in /home/ualnaji/public_html/Object-Oriented-Deepdive/php/classes/Author.php on line 14
+
+class Author {
     use ValidateUuid;
     /**
      * author id for this profile. this is the primary key
@@ -15,7 +23,7 @@ class author {
     private $authorId;
     /**
      * token handed out to verify that the profile is valid and not malicious
-     * @var $authorActivationToken
+     * @var string $authorActivationToken
      */
     private $authorActivationToken;
     /**
@@ -40,6 +48,36 @@ class author {
     private $authorUsername;
 
     /**
+     * Constructor for this author
+     *
+     * @param string | Uuid $newAuthorId id of this profile
+     * @param string $newAuthorActivationToken activation token to safe guard against malicious accounts
+     * @param string $newAuthorAvatarUrl Url for author's avatar
+     * @param string $newAuthorEmail string containing author email
+     * @param string $newAuthorHash string containing author password hash
+     * @param string $newAuthorUsername string containing author's username
+     * @throws \InvalidArgumentException if data types are not valid
+     * @throws \RangeException if data values are out of bound (strings too long, negative integer)
+     * @throws \TypeError if data type violates data hint
+     * @throws \Exception if some other exception occurs
+     */
+
+    public function __construct(string $newAuthorId, string $newAuthorActivationToken, string $newAuthorAvatarUrl, $newAuthorEmail, string $newAuthorHash, string $newAuthorUsername)
+    {
+        try {
+            $this->setAuthorId($newAuthorId);
+            $this->setAuthorActivationToken($newAuthorActivationToken);
+            $this->setAuthorAvatarUrl($newAuthorAvatarUrl);
+            $this->setAuthorEmail($newAuthorEmail);
+            $this->setAuthorHash($newAuthorHash);
+            $this->setAuthorUsername($newAuthorUsername);
+        } catch(\InvalidArgumentException | \RangeException | \Exception | \TypeEror $exception ) {
+            //determine what exception type was thrown
+            $exceptionType = get_class($exception);
+            throw(new $exceptionType($exception->getMessage(), 0, $exception));
+        }
+    }
+    /**
      * accessor method for profile id
      *
      * @return Uuid value of author id (or null if new Author)
@@ -56,7 +94,7 @@ class author {
      */
     public function setAuthorId ($newAuthorId): void {
         try{
-            $uuid = self::validateUuid($newAuthorId);
+            $uuid = self::ValidateUuid($newAuthorId);
         } catch (\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
             $exceptionType = get_class($exception);
             throw(new $exceptionType($exception->getMessage(), 0, $exception));
@@ -93,7 +131,7 @@ class author {
         }
         //make sure author activation token is exactly 32 characters
         if(strlen($newAuthorActivationToken) !==32) {
-            throw(new\RangeException("user activation token has to be 32 characters"))
+            throw(new\RangeException("user activation token has to be 32 characters"));
         }
         $this->authorActivationToken = $newAuthorActivationToken;
     }
@@ -102,7 +140,7 @@ class author {
      * @return string value of the author avatar url
      */
 
-    public function getauthorAvatarUrl(): string {
+    public function getAuthorAvatarUrl(): string {
         return ($this->authorAvatarUrl);
     }
     /**
@@ -153,7 +191,7 @@ class author {
     }
     //verify the email will fit in the database
         if(strlen($newAuthorEmail) >128) {
-            throw(new\RangeException("author email is too long");
+            throw(new\RangeException("author email is too long"));
         }
     //store the email
     $this->authorEmail = $newAuthorEmail;
@@ -171,27 +209,29 @@ class author {
      * mutator method for author hash
      * @param string $newAuthorHash new author hash
      * @throws \InvalidArgumentException if author hash is not secure
-     * @throws \RnageException if author hash is not exactly 97 characters long
+     * @throws \RnageException if author hash is not exactly 96 characters long
      * @throws \TypeError if profile hash is not a string
      */
 
-    public function setAuthorHash ($newAuthorHash): void {
+    public function setAuthorHash (string $newAuthorHash): void
+    {
         //enforce that the author hash is properly formatted
         $newAuthorHash = trim($newAuthorHash);
-        if (empty($newAuthorHash) === true;
-        throw (new \InvalidArgumentException ("author hash is empty or insecure"));
+        if (empty($newAuthorHash) === true) {
+            throw (new \InvalidArgumentException ("author hash is empty or insecure"));
+        }
+        //enforce the hash is really an argon hash
+        $authorHashInfo = password_get_info($newAuthorHash);
+        if ($authorHashInfo["algoName"] !== "argon2i") {
+            throw(new \InvalidArgumentException ("author hash is not a valid hash"));
+        }
+        //enforce that the author hash is exactly 96 characters
+        if (strlen($newAuthorHash) !== 96) {
+            throw (new\RangeException ("author hash must be exactly 96 characters long"));
+        }
+        //store hash
+        $this->authorHash = $newAuthorHash;
     }
-    //enforce the hash is really an argon hash
-    $authorHashInfo = password_get_info($newAuthorHash);
-    if($authorHashInfo["algoName"] !== "argon2i") {
-        throw(new \InvalidArgumentException ("author hash is not a valid hash"));
-    }
-    //enforce that the author hash is exactly 97 characters
-    if(strlen($newAuthorHash)!== 97) {
-        throw (new\RangeException ("author hash must be exactly 97 characters long"));
-    }
-    //store hash
-    $this->authorHash = $newAuthorHash;
     /**
      * accessor method for  author username
      * @return string value of the author username
@@ -200,6 +240,7 @@ class author {
     public function getAuthorUsername(): string {
         return ($this->authorUsername);
     }
+
 
     /**
      * mutator method for author username

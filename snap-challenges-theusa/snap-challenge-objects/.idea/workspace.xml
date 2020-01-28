@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1213f561-9416-45c8-83e1-45feab078a5e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/snap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/snap.php" beforeDir="false" afterPath="$PROJECT_DIR$/snap.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +32,9 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="settings.editor.selected.configurable" value="settings.nodejs" />
   </component>
@@ -58,11 +60,33 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1580137521116</updated>
-      <workItem from="1580137522969" duration="400000" />
+      <workItem from="1580137522969" duration="4227000" />
     </task>
+    <task id="LOCAL-00001" summary="Added state variables, accessor methods, and mutator methods">
+      <created>1580139982074</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1580139982074</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added state variables, accessor methods, and mutator methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added state variables, accessor methods, and mutator methods" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="250" y="23" key="CommitChangelistDialog2" timestamp="1580139981894">
+      <screen x="0" y="23" width="1440" height="814" />
+    </state>
+    <state x="250" y="23" key="CommitChangelistDialog2/0.23.1440.814@0.23.1440.814" timestamp="1580139981894" />
+    <state x="352" y="148" key="Vcs.Push.Dialog.v2" timestamp="1580139983269">
+      <screen x="0" y="23" width="1440" height="814" />
+    </state>
+    <state x="352" y="148" key="Vcs.Push.Dialog.v2/0.23.1440.814@0.23.1440.814" timestamp="1580139983269" />
   </component>
 </project>
