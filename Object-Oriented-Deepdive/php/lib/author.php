@@ -15,5 +15,5 @@ $newAuthor = new Author ("40a2540a-d711-44f5-a3d3-008593054e77", "12345678123456
 
 //echo ($newAuthor->getAuthorId());
 
-echo ($newAuthor-> getAuthorId()),($newAuthor-> getAuthorActivationToken()),($newAuthor-> getAuthorAvatarUrl()),($newAuthor-> getAuthorEmail()),($newAuthor-> getAuthorHash()),($newAuthor-> getAuthorUsername());
+//echo ($newAuthor-> getAuthorId()),($newAuthor-> getAuthorActivationToken()),($newAuthor-> getAuthorAvatarUrl()),($newAuthor-> getAuthorEmail()),($newAuthor-> getAuthorHash()),($newAuthor-> getAuthorUsername());
 var_dump($newAuthor);
